@@ -5,6 +5,9 @@ export const crearUsuario = async (req, res) => {
     const usuario = await userService.crearUsuario(req.body);
     res.status(201).json(usuario);
   } catch (error) {
+    if (error.message === "El correo ya está registrado") {
+      return res.status(400).json({ message: error.message });
+    }
     res.status(500).json({ message: "Error al crear usuario", error });
   }
 };
@@ -39,6 +42,9 @@ export const actualizarUsuario = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     res.json(usuario);
   } catch (error) {
+    if (error.message.includes("El correo ya está registrado")) {
+      return res.status(400).json({ message: error.message });
+    }
     res.status(400).json({ message: error.message });
   }
 };
