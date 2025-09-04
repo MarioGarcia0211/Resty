@@ -51,17 +51,47 @@ export const obtenerRestaurante = async (req, res) => {
   }
 };
 
+// export const actualizarRestaurante = async (req, res) => {
+//   try {
+//     const restaurante = await restaurantService.actualizarRestaurante(
+//       req.params.id,
+//       req.body
+//     );
+//     if (!restaurante)
+//       return res.status(404).json({ message: "Restaurante no encontrado" });
+//     res.json(restaurante);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
+
 export const actualizarRestaurante = async (req, res) => {
   try {
+    let logo_url = null;
+
+    if (req.file) {
+      logo_url = await uploadService.uploadImageToCloudinary(req.file.buffer);
+    }
+
+    const data = {
+      ...req.body,
+    };
+
+    if (logo_url) {
+      data.logo_url = logo_url;
+    }
+
     const restaurante = await restaurantService.actualizarRestaurante(
       req.params.id,
-      req.body
+      data
     );
+
     if (!restaurante)
       return res.status(404).json({ message: "Restaurante no encontrado" });
+
     res.json(restaurante);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: "Error al actualizar restaurante", error });
   }
 };
 
