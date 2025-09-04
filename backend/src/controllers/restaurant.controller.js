@@ -1,11 +1,31 @@
 import * as restaurantService from "../services/restaurant.service.js";
+import * as uploadService from "../services/upload.service.js";
+
+// export const crearRestaurante = async (req, res) => {
+//   try {
+//     const restaurante = await restaurantService.crearRestaurante(req.body);
+//     res.status(201).json(restaurante);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
 
 export const crearRestaurante = async (req, res) => {
   try {
-    const restaurante = await restaurantService.crearRestaurante(req.body);
+    let logo_url = null;
+
+    if (req.file) {
+      logo_url = await uploadService.uploadImageToCloudinary(req.file.buffer);
+    }
+
+    const restaurante = await restaurantService.crearRestaurante({
+      ...req.body,
+      logo_url,
+    });
+
     res.status(201).json(restaurante);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: "Error al crear restaurante", error });
   }
 };
 
