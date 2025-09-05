@@ -2,12 +2,51 @@ import * as userService from "../services/user.service.js";
 
 export const crearUsuario = async (req, res) => {
   try {
-    const usuario = await userService.crearUsuario(req.body);
-    res.status(201).json(usuario);
+    const { rol } = req.body;
+    const usuarioLogueado = req.user;
+
+    // 1. SUPERADMIN
+    if (usuarioLogueado.rol === "superadmin") {
+      if (rol !== "admin" && rol !== "mesero") {
+        return res.status(403).json({
+          message: "Un superadmin solo puede crear admin o mesero",
+        });
+      }
+
+      if (!req.body.restaurante) {
+        return res
+          .status(400)
+          .json({ message: "Debes indicar el restaurante" });
+      }
+
+      const nuevoUsuario = await userService.crearUsuario(req.body);
+      return res.status(201).json(nuevoUsuario);
+    }
+
+    // 2. ADMIN
+    if (usuarioLogueado.rol === "admin") {
+      if (rol !== "mesero") {
+        return res
+          .status(403)
+          .json({ message: "Un admin solo puede crear meseros" });
+      }
+
+      // Forzar el restaurante del admin
+      req.body.restaurante = usuarioLogueado.restaurante;
+
+      const nuevoUsuario = await userService.crearUsuario(req.body);
+      return res.status(201).json(nuevoUsuario);
+    }
+
+    // 3. MESERO (o cualquier otro)
+    return res
+      .status(403)
+      .json({ message: "No tienes permisos para crear usuarios" });
   } catch (error) {
     if (error.message === "El correo ya está registrado") {
       return res.status(400).json({ message: error.message });
     }
+    console.error("Error al crear usuario:", error);
     res.status(500).json({ message: "Error al crear usuario", error });
   }
 };
