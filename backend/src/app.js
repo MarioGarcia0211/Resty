@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import restaurantRoutes from "./routes/restaurant.route.js";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
+import tableRoutes from "./routes/table.route.js";
 
 const app = express();
 
@@ -17,5 +18,6 @@ app.use(cookieParser());
 app.use("/api/restaurantes", restaurantRoutes);
 app.use("/api/usuarios", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/mesas", tableRoutes);
 
 export default app;
