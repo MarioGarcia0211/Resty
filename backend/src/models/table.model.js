@@ -26,7 +26,6 @@ const tableSchema = new Schema(
     restaurante: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Restaurant",
-      default: null,
     },
   },
   {
