@@ -73,13 +73,59 @@ export const obtenerUsuario = async (req, res) => {
 
 export const actualizarUsuario = async (req, res) => {
   try {
-    const usuario = await userService.actualizarUsuario(
-      req.params.id,
-      req.body
-    );
-    if (!usuario)
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    res.json(usuario);
+    const usuarioLogueado = req.user;
+    const { rol } = req.body;
+
+    // 1. SUPERADMIN
+    if (usuarioLogueado.rol === "superadmin") {
+      if (rol && rol !== "admin" && rol !== "mesero") {
+        return res.status(403).json({
+          message: "Un superadmin solo puede actualizar admin o mesero",
+        });
+      }
+
+      if ((rol === "admin" || rol === "mesero") && !req.body.restaurante) {
+        return res
+          .status(400)
+          .json({ message: "Debes indicar el restaurante" });
+      }
+
+      const usuario = await userService.actualizarUsuario(
+        req.params.id,
+        req.body
+      );
+      if (!usuario)
+        return res.status(404).json({ message: "Usuario no encontrado" });
+
+      return res.json(usuario);
+    }
+
+    // 2. ADMIN
+    if (usuarioLogueado.rol === "admin") {
+      // Solo puede actualizar meseros
+      if (rol && rol !== "mesero") {
+        return res
+          .status(403)
+          .json({ message: "Un admin solo puede actualizar meseros" });
+      }
+
+      // Forzar el restaurante del admin
+      req.body.restaurante = usuarioLogueado.restaurante;
+
+      const usuario = await userService.actualizarUsuario(
+        req.params.id,
+        req.body
+      );
+      if (!usuario)
+        return res.status(404).json({ message: "Usuario no encontrado" });
+
+      return res.json(usuario);
+    }
+
+    // 3. MESERO no tienen permisos
+    return res
+      .status(403)
+      .json({ message: "No tienes permisos para actualizar usuarios" });
   } catch (error) {
     if (error.message.includes("El correo ya está registrado")) {
       return res.status(400).json({ message: error.message });

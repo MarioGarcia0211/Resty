@@ -13,6 +13,9 @@ export const loginUser = async ({ email, contrasena }) => {
   const isMatch = await bcrypt.compare(contrasena, user.contrasena);
   if (!isMatch) throw new Error("Contraseña incorrecta");
 
+  const userObj = user.toObject();
+  delete userObj.contrasena;
+
   const payload = {
     id: user._id,
     rol: user.rol,
@@ -22,7 +25,7 @@ export const loginUser = async ({ email, contrasena }) => {
   const accessToken = createAccessToken(payload);
   const refreshToken = createRefreshToken(payload);
 
-  return { user, accessToken, refreshToken };
+  return { user: userObj, accessToken, refreshToken };
 };
 
 export const refreshAccessToken = (token) => {

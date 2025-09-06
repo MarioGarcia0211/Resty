@@ -13,7 +13,12 @@ router.post(
 );
 router.get("/", userController.listarUsuarios);
 router.get("/:id", userController.obtenerUsuario);
-router.put("/:id", userController.actualizarUsuario);
+router.put(
+  "/:id",
+  verifyToken,
+  authorizeRoles("superadmin", "admin"),
+  userController.actualizarUsuario
+);
 router.delete("/:id", userController.eliminarUsuario);
 
 export default router;

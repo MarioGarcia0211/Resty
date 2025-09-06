@@ -25,7 +25,11 @@ export const crearUsuario = async (data) => {
     contrasena: hashedPassword,
   });
 
-  return await usuario.save();
+  const usuarioGuardado = await usuario.save();
+  const usuarioObj = usuarioGuardado.toObject();
+  delete usuarioObj.contrasena;
+
+  return usuarioObj;
 };
 
 export const listarUsuarios = async () => {
