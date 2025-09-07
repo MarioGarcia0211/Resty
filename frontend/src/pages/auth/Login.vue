@@ -50,7 +50,17 @@ const handleLogin = async () => {
   await authStore.loginUser(email.value, contrasena.value);
 
   if (authStore.isAuthenticated) {
-    router.push("/dashboard"); // Redirige si login fue exitoso
+    switch (authStore.user.rol) {
+      case "superadmin":
+        router.push({ name: "SuperAdminDashboard" });
+        break;
+      case "admin":
+        router.push({ name: "AdminRestaurante" });
+        break;
+      case "mesero":
+        router.push({ name: "MeseroPedidos" });
+        break;
+    }
   }
 };
 </script>
