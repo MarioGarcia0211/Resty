@@ -35,4 +35,11 @@ import Sidebar from "../components/sidebar/Sidebar.vue";
 .main-content {
   overflow-y: auto;
 }
+
+/* El main debe correrse 250px para no quedar debajo del aside */
+@media (min-width: 992px) {
+  .main-content {
+    margin-left: 250px;
+  }
+}
 </style>

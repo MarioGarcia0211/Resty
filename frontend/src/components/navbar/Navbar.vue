@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <!-- Botón abrir sidebar solo en móvil -->
       <button
-        class="btn btn-outline-primary d-lg-none me-2"
+        class="navbar-toggler d-lg-none me-2"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#sidebarMobile"
@@ -14,14 +14,14 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <a class="navbar-brand fw-bold text-primary">Superadmin</a>
+      <a class="navbar-brand fw-bold text-primary">Resty</a>
 
       <!-- Opciones de usuario -->
       <div class="ms-auto d-flex align-items-center">
         <span class="me-3 fw-semibold text-secondary">
-          {{ authStore.user?.nombre || "Invitado" }}
+          {{ authStore.user?.nombre }}
         </span>
-        <button class="btn btn-outline-primary btn-sm" @click="logout">
+        <button class="btn btn-primary btn-sm" @click="logout">
           Cerrar sesión
         </button>
       </div>

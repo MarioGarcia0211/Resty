@@ -1,13 +1,15 @@
 <template>
   <!-- Mobile: Offcanvas -->
   <div
-    class="offcanvas offcanvas-start bg-light border-end d-lg-none"
+    class="offcanvas offcanvas-start border-end d-lg-none custom-offcanvas"
     tabindex="-1"
     id="sidebarMobile"
     aria-labelledby="sidebarMobileLabel"
   >
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title text-primary" id="sidebarMobileLabel">Menú</h5>
+    <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title fw-bold text-primary" id="sidebarMobileLabel">
+        Menú
+      </h5>
       <button
         type="button"
         class="btn-close"
@@ -16,77 +18,58 @@
       ></button>
     </div>
 
-    <!-- Scroll interno para links -->
+    <!-- Scroll interno -->
     <div class="offcanvas-body p-0" style="overflow-y: auto; max-height: 100vh">
       <nav class="nav flex-column p-3">
         <router-link
           to="/superadmin/dashboard"
-          class="nav-link link-dark fw-medium"
+          class="nav-link sidebar-link"
           active-class="active-link"
         >
-          Dashboard
+          <i class="bi bi-speedometer2 me-2"></i> Dashboard
         </router-link>
         <router-link
           to="/superadmin/restaurantes"
-          class="nav-link link-dark fw-medium"
+          class="nav-link sidebar-link"
           active-class="active-link"
         >
-          Restaurantes
+          <i class="bi bi-shop me-2"></i> Restaurantes
         </router-link>
         <router-link
           to="/superadmin/usuarios"
-          class="nav-link link-dark fw-medium"
+          class="nav-link sidebar-link"
           active-class="active-link"
         >
-          Usuarios
+          <i class="bi bi-people me-2"></i> Usuarios
         </router-link>
       </nav>
     </div>
   </div>
-  <!-- Desktop: Aside fijo con scroll -->
-  <aside
-    class="d-none d-lg-block bg-light border-end"
-    style="
-      position: fixed;
-      top: 56px; /* altura del navbar */
-      bottom: 0;
-      left: 0;
-      width: 250px;
-      overflow-y: auto;
-    "
-  >
+
+  <!-- Desktop: Aside fijo -->
+  <aside class="d-none d-lg-block custom-sidebar border-end">
     <nav class="nav flex-column p-3">
       <router-link
         to="/superadmin/dashboard"
-        class="nav-link link-dark fw-medium"
+        class="nav-link sidebar-link"
         active-class="active-link"
       >
-        Dashboard
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
       </router-link>
       <router-link
         to="/superadmin/restaurantes"
-        class="nav-link link-dark fw-medium"
+        class="nav-link sidebar-link"
         active-class="active-link"
       >
-        Restaurantes
+        <i class="bi bi-shop me-2"></i> Restaurantes
       </router-link>
       <router-link
         to="/superadmin/usuarios"
-        class="nav-link link-dark fw-medium"
+        class="nav-link sidebar-link"
         active-class="active-link"
       >
-        Usuarios
+        <i class="bi bi-people me-2"></i> Usuarios
       </router-link>
-
-      <!-- <router-link
-        v-for="n in 20"
-        :key="n"
-        to="/superadmin/dashboard"
-        class="nav-link link-dark fw-medium"
-        active-class="active-link"
-      >
-        Item {{ n }}
-      </router-link> -->
     </nav>
   </aside>
 </template>
@@ -104,15 +87,42 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.active-link {
-  background-color: #e9f2ff;
-  color: #0d6efd !important;
-  border-radius: 6px;
-  padding-left: 12px;
+/* Sidebar general */
+.custom-sidebar {
+  position: fixed;
+  top: 56px; /* altura del navbar */
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  background-color: #ffff;
+  overflow-y: auto;
+  box-shadow: inset -1px 0 0 var(--color-gray-light);
 }
 
-.nav-link:hover {
-  background-color: #f1f1f1;
+/* Mobile offcanvas */
+.custom-offcanvas {
+  background-color: #ffff;
+}
+
+/* Links */
+.sidebar-link {
+  color: var(--color-text-dark);
+  font-weight: 500;
   border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-link:hover {
+  color: var(--color-primary);
+  transform: translateX(3px);
+}
+
+.active-link {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary) !important;
+  font-weight: 600;
 }
 </style>
