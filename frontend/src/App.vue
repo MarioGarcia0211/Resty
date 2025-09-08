@@ -1,7 +1,19 @@
-<script setup></script>
-
 <template>
-  <router-view />
+  <div :class="layoutClass">
+    <router-view />
+  </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { useRoute } from "vue-router";
+import { computed } from "vue";
+
+const route = useRoute();
+
+const layoutClass = computed(() => {
+  if (route.name === "Login") {
+    return "bg-login";
+  }
+  return "bg-main";
+});
+</script>
