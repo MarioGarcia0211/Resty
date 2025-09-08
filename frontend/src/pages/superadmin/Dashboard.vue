@@ -1,5 +1,6 @@
 <template>
-  <div></div>
+  <div>
+    <h1>Dashboard Superadmin</h1>
+    <p>Bienvenido, aquí puedes ver las métricas generales.</p>
+  </div>
 </template>
-<script setup></script>
-<style scoped></style>

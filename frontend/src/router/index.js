@@ -11,6 +11,7 @@ import Login from "../pages/auth/Login.vue";
 
 // Pages
 import SuperAdminDashboard from "../pages/superadmin/Dashboard.vue";
+import SuperAdminRestaurant from "../pages/superadmin/Restaurant.vue";
 import AdminRestaurante from "../pages/admin/Restaurante.vue";
 import MeseroPedidos from "../pages/waiter/Pedidos.vue";
 
@@ -27,6 +28,11 @@ const routes = [
         path: "dashboard",
         name: "SuperAdminDashboard",
         component: SuperAdminDashboard,
+      },
+      {
+        path: "restaurantes",
+        name: "SuperAdminRestaurant",
+        component: SuperAdminRestaurant,
       },
     ],
   },
