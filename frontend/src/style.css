@@ -24,6 +24,21 @@ body,
   background: red;
 }
 
+.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+.form-control {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 0.2rem var(--color-primary-light);
+}
+
 /* .cont-fluid {
   flex: 1;
   width: 100%;
@@ -58,4 +73,41 @@ body,
 .btn-primary:focus,
 .btn-primary:focus-visible {
   background-color: var(--color-primary) !important;
+}
+
+.btn-success {
+  background-color: var(--color-success);
+  border: none;
+  transition: background-color 0.3s;
+}
+.btn-success:hover {
+  background-color: var(--color-success-dark);
+}
+
+.btn-danger {
+  background-color: var(--color-danger);
+  border: none;
+  transition: background-color 0.3s;
+}
+.btn-danger:hover {
+  background-color: var(--color-danger-dark);
+}
+
+.btn-warning {
+  background-color: var(--color-warning);
+  border: none;
+  color: var(--color-secondary-dark); /* texto legible sobre amarillo */
+  transition: background-color 0.3s;
+}
+.btn-warning:hover {
+  background-color: var(--color-warning-dark);
+}
+
+.btn-info {
+  background-color: var(--color-info);
+  border: none;
+  transition: background-color 0.3s;
+}
+.btn-info:hover {
+  background-color: var(--color-info-dark);
 }

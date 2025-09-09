@@ -83,13 +83,17 @@ defineProps({
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
-/* 🔹 Encabezado con degradado */
+/* Encabezado con degradado */
 .image-cap {
   margin: 0;
   padding: 20px 0;
   display: flex;
   justify-content: center;
-  background: linear-gradient(135deg, #ff6b6b, #f7b733);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
 }
 
 /* Imagen / Logo */
@@ -102,7 +106,7 @@ defineProps({
   background: #fafafa;
   object-fit: cover;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease; /* 🔹 Animación */
+  transition: transform 0.3s ease;
 }
 
 /* Hover zoom en la imagen */

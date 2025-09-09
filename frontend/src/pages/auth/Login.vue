@@ -134,17 +134,6 @@ const handleLogin = async () => {
   display: block;
 }
 
-.form-control {
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 15px;
-}
-
-.form-control:focus {
-  border-color: var(--color-primary-light);
-  box-shadow: 0 0 0 0.2rem var(--color-primary-light);
-}
-
 .btn-primary {
   border: none;
   font-weight: 600;

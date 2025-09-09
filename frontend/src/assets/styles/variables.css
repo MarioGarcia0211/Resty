@@ -1,32 +1,53 @@
 :root {
   /* Paleta principal */
-  --color-primary: #FF6B35;             /* Naranja cálido, apetitoso */
-  --color-primary-dark: #cc562a;        /* Naranja más oscuro */
-  --color-primary-light: rgba(255, 107, 53, 0.25); /* Naranja claro translúcido */
-  
-  --color-secondary: #2E2E2E;           /* Gris oscuro, profesional */
-  --color-secondary-dark: #1f1f1f;      /* Gris más oscuro */
+  --color-primary: #ff6b35; /* Naranja cálido, apetitoso */
+  --color-primary-dark: #cc562a; /* Naranja más oscuro */
+  --color-primary-light: rgba(
+    255,
+    107,
+    53,
+    0.25
+  ); /* Naranja claro translúcido */
+
+  --color-secondary: #2e2e2e; /* Gris oscuro, profesional */
+  --color-secondary-dark: #1f1f1f; /* Gris más oscuro */
   --color-secondary-light: rgba(46, 46, 46, 0.25); /* Gris claro translúcido */
 
-  --color-accent: #FFD166;               /* Amarillo pastel, energía */
-  --color-accent-dark: #e6bb5c;          /* Amarillo más oscuro */
-  --color-accent-light: rgba(255, 209, 102, 0.25); /* Amarillo claro translúcido */
+  --color-accent: #ffd166; /* Amarillo pastel, energía */
+  --color-accent-dark: #e6bb5c; /* Amarillo más oscuro */
+  --color-accent-light: rgba(
+    255,
+    209,
+    102,
+    0.25
+  ); /* Amarillo claro translúcido */
 
   /* Neutros */
-  --color-white: #FFFFFF;
+  --color-white: #ffffff;
   --color-black: #000000;
-  --color-bg-light: #FAFAFA; /* Blanco suave */
-  --color-gray-light: #E5E5E5;
-  --color-gray: #CCCCCC;
+  --color-bg-light: #fafafa; /* Blanco suave */
+  --color-gray-light: #e5e5e5;
+  --color-gray: #cccccc;
   --color-gray-dark: #333333;
 
   /* Texto */
-  --color-text-dark: #2E2E2E;
-  --color-text-light: #FFFFFF;
+  --color-text-dark: #2e2e2e;
+  --color-text-light: #ffffff;
 
   /* Estados */
-  --color-success: #22c55e; /* Verde éxito */
-  --color-danger: #ef4444;  /* Rojo error */
-  --color-warning: #f97316; /* Naranja advertencia */
-  --color-info: #06b6d4;    /* Azul información */
+  --color-success: #4ade80;
+  --color-success-dark: #22c55e;
+  --color-success-light: rgba(74, 222, 128, 0.25);
+
+  --color-danger: #f43f5e;
+  --color-danger-dark: #e11d48;
+  --color-danger-light: rgba(244, 63, 94, 0.25);
+
+  --color-warning: #facc15;
+  --color-warning-dark: #eab308;
+  --color-warning-light: rgba(250, 204, 21, 0.25);
+
+  --color-info: #3b82f6;
+  --color-info-dark: #2563eb;
+  --color-info-light: rgba(59, 130, 246, 0.25);
 }

@@ -147,8 +147,9 @@ function closeOffcanvas() {
 }
 
 .active-link {
-  background-color: var(--color-primary-light);
-  color: var(--color-primary) !important;
+  background: var(--color-primary-light);
+  border-left: 4px solid var(--color-primary);
   font-weight: 600;
+  color: var(--color-primary) !important;
 }
 </style>
