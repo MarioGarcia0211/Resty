@@ -21,7 +21,14 @@ api.interceptors.response.use(
   async (error) => {
     const authStore = useAuthStore();
 
-    if (error.response?.status === 401 && authStore.refreshToken) {
+    const originalRequest = error.config;
+
+    if (
+      error.response?.status === 401 &&
+      error.response?.data?.error === "jwt expired" &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
       try {
         const res = await axios.post("http://localhost:4000/api/auth/refresh", {
           refreshToken: authStore.refreshToken,
@@ -37,12 +44,13 @@ api.interceptors.response.use(
           })
         );
 
-        error.config.headers.Authorization = `Bearer ${authStore.accessToken}`;
-        return api(error.config);
+        originalRequest.headers.Authorization = `Bearer ${authStore.accessToken}`;
+        return api(originalRequest);
       } catch (err) {
         authStore.logout();
       }
     }
+
     return Promise.reject(error);
   }
 );

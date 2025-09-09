@@ -4,7 +4,7 @@
     <div class="d-flex cont-fluid">
       <Sidebar />
       <main class="flex-grow-1 p-4 main-content">
-        <div class="card shadow-sm border-0 p-4">
+        <div>
           <router-view class="bg-superadmin" />
         </div>
       </main>
