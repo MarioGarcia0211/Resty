@@ -25,6 +25,7 @@
           to="/superadmin/dashboard"
           class="nav-link sidebar-link"
           active-class="active-link"
+          @click="closeOffcanvas"
         >
           <i class="bi bi-speedometer2 me-2"></i> Dashboard
         </router-link>
@@ -32,6 +33,7 @@
           to="/superadmin/restaurantes"
           class="nav-link sidebar-link"
           active-class="active-link"
+          @click="closeOffcanvas"
         >
           <i class="bi bi-shop me-2"></i> Restaurantes
         </router-link>
@@ -39,6 +41,7 @@
           to="/superadmin/usuarios"
           class="nav-link sidebar-link"
           active-class="active-link"
+          @click="closeOffcanvas"
         >
           <i class="bi bi-people me-2"></i> Usuarios
         </router-link>
@@ -78,12 +81,33 @@
 import { onMounted } from "vue";
 import * as bootstrap from "bootstrap";
 
+let offcanvasInstance;
+
 onMounted(() => {
   const sidebarEl = document.getElementById("sidebarMobile");
   if (sidebarEl) {
-    new bootstrap.Offcanvas(sidebarEl);
+    offcanvasInstance = new bootstrap.Offcanvas(sidebarEl);
   }
 });
+
+function closeOffcanvas() {
+  if (offcanvasInstance) {
+    offcanvasInstance.hide();
+
+    setTimeout(() => {
+      const backdrop = document.querySelector(".offcanvas-backdrop");
+      if (backdrop) {
+        backdrop.remove();
+        document.body.classList.remove(
+          "offcanvas-backdrop",
+          "show",
+          "modal-open"
+        );
+        document.body.style.overflow = "";
+      }
+    }, 300);
+  }
+}
 </script>
 
 <style scoped>
@@ -94,14 +118,16 @@ onMounted(() => {
   bottom: 0;
   left: 0;
   width: 250px;
-  background-color: #ffff;
+  background-color: #f4f6f9;
   overflow-y: auto;
   box-shadow: inset -1px 0 0 var(--color-gray-light);
 }
 
 /* Mobile offcanvas */
 .custom-offcanvas {
-  background-color: #ffff;
+  width: 250px;
+  max-width: 80%;
+  background: #ffff;
 }
 
 /* Links */

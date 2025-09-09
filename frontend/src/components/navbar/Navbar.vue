@@ -41,3 +41,9 @@ function logout() {
   router.push("/");
 }
 </script>
+
+<style scoped>
+.navbar {
+  min-height: 60px;
+}
+</style>

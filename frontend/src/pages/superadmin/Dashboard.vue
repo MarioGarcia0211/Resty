@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Dashboard Superadmin</h1>
-    <p>Bienvenido, aquí puedes ver las métricas generales.</p>
+    <h1>Dashboard</h1>
+    <p>Bienvenido, aquí puedes ver las metricas.</p>
   </div>
 </template>
