@@ -1,6 +1,7 @@
 import api from "./axios";
 
-export const listarRestaurantes = () => api.get("/restaurantes");
+export const listarRestaurantes = (page = 1, limit = 10, search = "") =>
+  api.get("/restaurantes", { params: { page, limit, search } });
 
 export const obtenerRestaurante = (id) => api.get(`/restaurantes/${id}`);
 
