@@ -31,7 +31,14 @@ export const crearRestaurante = async (req, res) => {
 
 export const listarRestaurantes = async (req, res) => {
   try {
-    const restaurantes = await restaurantService.listarRestaurantes();
+    const { page = 1, limit = 10, search = "" } = req.query;
+
+    const restaurantes = await restaurantService.listarRestaurantes(
+      parseInt(page),
+      parseInt(limit),
+      search
+    );
+
     res.json(restaurantes);
   } catch (error) {
     res.status(500).json({ message: error.message });

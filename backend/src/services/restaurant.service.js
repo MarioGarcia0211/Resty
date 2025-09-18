@@ -5,8 +5,30 @@ export const crearRestaurante = async (data) => {
   return await restaurante.save();
 };
 
-export const listarRestaurantes = async () => {
-  return await Restaurant.find();
+export const listarRestaurantes = async (page = 1, limit = 10, search = "") => {
+  const query = search
+    ? {
+        $or: [
+          { nombre: { $regex: search, $options: "i" } },
+          { direccion: { $regex: search, $options: "i" } },
+          { telefono: { $regex: search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const skip = (page - 1) * limit;
+
+  const [restaurantes, total] = await Promise.all([
+    Restaurant.find(query).skip(skip).limit(limit),
+    Restaurant.countDocuments(query),
+  ]);
+
+  return {
+    total,
+    page,
+    totalPages: Math.ceil(total / limit),
+    data: restaurantes,
+  };
 };
 
 export const obtenerRestaurantePorId = async (id) => {
