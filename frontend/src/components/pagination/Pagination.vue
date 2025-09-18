@@ -87,3 +87,67 @@ function changePage(page) {
   }
 }
 </script>
+
+<style scoped>
+.pagination button,
+.pagination a,
+.pagination span {
+  cursor: pointer;
+}
+
+.pagination {
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pagination .page-item .page-link {
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  color: var(--color-secondary);
+  background-color: var(--color-bg-light);
+  transition: all 0.2s ease;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: var(--color-gray-light);
+  color: var(--color-gray-dark);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 📱 Responsive */
+@media (max-width: 576px) {
+  .pagination {
+    justify-content: center;
+    gap: 0.3rem;
+  }
+
+  .pagination .page-item .page-link {
+    padding: 0.4rem 0.7rem; /* Más compacto */
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
+  /* Opcional: ocultar los textos largos en móviles */
+  .pagination .page-item:first-child .page-link,
+  .pagination .page-item:last-child .page-link {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+</style>
