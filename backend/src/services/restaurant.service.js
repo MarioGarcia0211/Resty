@@ -19,7 +19,7 @@ export const listarRestaurantes = async (page = 1, limit = 10, search = "") => {
   const skip = (page - 1) * limit;
 
   const [restaurantes, total] = await Promise.all([
-    Restaurant.find(query).skip(skip).limit(limit),
+    Restaurant.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
     Restaurant.countDocuments(query),
   ]);
 
